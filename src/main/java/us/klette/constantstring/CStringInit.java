@@ -43,7 +43,9 @@ public final class CStringInit {
     /**
      * Private.
      */
-    private CStringInit() {}
+    private CStringInit() {
+        // No construction is necessary
+    }
 
     /**
      * Creates a new CString instance from the given string.

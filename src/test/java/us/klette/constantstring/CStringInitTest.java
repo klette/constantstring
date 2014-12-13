@@ -28,33 +28,24 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package us.klette.constantstring.internal;
+package us.klette.constantstring;
 
 import org.junit.Test;
-import us.klette.constantstring.CStringInit;
 
-import static org.assertj.core.api.Assertions.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 
-public class CStringSubRangeTest {
+import static org.junit.Assert.assertTrue;
 
-    @Test
-    public void testToString() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 3, 4);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("foobar".substring(3, 4));
-    }
+public class CStringInitTest {
 
     @Test
-    public void overflow() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 10, 12);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("");
+    public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<CStringInit> constructor = CStringInit.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 
-    @Test
-    public void partialOverflow() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 3, 12);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("bar");
-    }
 }

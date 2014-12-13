@@ -73,6 +73,6 @@ public class CStringSubRange implements CString {
         final int length = childEval.length();
         return this.idx > length - 1
                ? ""
-               : childEval.substring(this.idx, end);
+               : childEval.substring(this.idx, Math.min(end, length));
     }
 }

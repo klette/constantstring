@@ -29,9 +29,7 @@
  */
 package us.klette.constantstring;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import us.klette.constantstring.internal.CStringSubRange;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
