@@ -29,6 +29,9 @@
  */
 package us.klette.constantstring;
 
+import us.klette.constantstring.internal.CStringConcat;
+import us.klette.constantstring.internal.CStringSub;
+
 /**
  * The CString interface defines the allowed operations
  * within ConstantString.
@@ -56,5 +59,17 @@ public interface CString {
      * @param index The index of which to start the new string
      * @return The CString representation after the applied substring operation
      */
-    CString substring(int index);
+    default CString substring(int index) {
+        return new CStringSub(this, index);
+    }
+
+    /**
+     * Append another CString after the current instance.
+     *
+     * @param other The instance to be appended.
+     * @return The CString representation of the two
+     */
+    default CString concat(CString other) {
+        return new CStringConcat(this, other);
+    }
 }

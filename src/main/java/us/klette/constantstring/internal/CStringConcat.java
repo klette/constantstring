@@ -32,39 +32,27 @@ package us.klette.constantstring.internal;
 import us.klette.constantstring.CString;
 
 /**
- * Representation of a substring operation.
+ * Representation of two concatenated CString instances.
  *
  * @author Kristian Klette (klette@klette.us)
  */
-public class CStringSub implements CString {
-    /**
-     * The child node which the substring operation is
-     * performed upon.
-     */
-    private final transient CString value;
+public class CStringConcat implements CString {
+    private final CString first;
+    private final CString second;
 
     /**
-     * The index from which the text is kept.
-     */
-    private final transient int idx;
-
-    /**
-     * Creates a new substring operation on the given value.
+     * Creates a new concatenation in the order of the parameters.
      *
-     * @param val   The value used as the child node for the operation.
-     * @param index The index from which the text is kept.
+     * @param first The CString that should be concated on to
+     * @param second The CString that should be appended to the other
      */
-    public CStringSub(final CString val, final int index) {
-        this.value = val;
-        this.idx = index;
+    public CStringConcat(final CString first, final CString second) {
+        this.first = first;
+        this.second = second;
     }
 
     @Override
-    public final String toString() {
-        final String childEval = this.value.toString();
-        final int length = childEval.length();
-        return this.idx > length - 1
-               ? ""
-               : childEval.substring(this.idx);
+    public String toString() {
+        return first.toString() + second.toString();
     }
 }

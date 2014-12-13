@@ -61,9 +61,4 @@ public final class CStringLeaf implements CString {
     public String toString() {
         return this.value;
     }
-
-    @Override
-    public CString substring(final int index) {
-        return new CStringSub(this, index);
-    }
 }

@@ -32,6 +32,8 @@ package us.klette.constantstring;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Test cases for basic operations.
  *
@@ -49,7 +51,7 @@ public final class OperationsTest {
         final String string = "basic";
         final CString cString = CStringInit.create(string);
         final String eval = cString.toString();
-        Assertions.assertThat(eval).isEqualTo(string);
+        assertThat(eval).isEqualTo(string);
     }
 
     /**
@@ -64,7 +66,7 @@ public final class OperationsTest {
         final CString initial = CStringInit.create(string);
         final CString substring = initial.substring(index);
         final String evaluated = substring.toString();
-        Assertions.assertThat(evaluated).isEqualTo(string.substring(index));
+        assertThat(evaluated).isEqualTo(string.substring(index));
     }
 
     /**
@@ -79,7 +81,7 @@ public final class OperationsTest {
                 .create(foobar)
                 .substring(foobar.length())
                 .toString();
-        Assertions.assertThat(substr).isEqualTo("");
+        assertThat(substr).isEqualTo("");
     }
 
     /**
@@ -93,6 +95,15 @@ public final class OperationsTest {
         final CString first = initial.substring(1);
         final CString second = first.substring(1);
         final String evaluated = second.toString();
-        Assertions.assertThat(evaluated).isEqualTo("c");
+        assertThat(evaluated).isEqualTo("c");
+    }
+
+    @Test
+    public void concatTest() throws Exception {
+        final CString foo = CStringInit.create("foo");
+        final CString bar = CStringInit.create("bar");
+        final CString foobar = foo.concat(bar);
+
+        assertThat(foobar.toString()).isEqualTo("foobar");
     }
 }
