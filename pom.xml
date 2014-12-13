@@ -37,6 +37,17 @@
     <artifactId>constantstring</artifactId>
     <version>1.0-SNAPSHOT</version>
     <url>https://github.com/klette/constantstring</url>
+    <inceptionYear>2014</inceptionYear>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <findbugs.version>3.0.0</findbugs.version>
+        <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
+        <junit.version>4.11</junit.version>
+        <assertj-core.version>1.7.0</assertj-core.version>
+        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
+    </properties>
 
     <licenses>
         <license>
@@ -54,8 +65,6 @@
             <url>https://klette.us</url>
         </developer>
     </developers>
-
-    <inceptionYear>2014</inceptionYear>
 
     <scm>
         <url>https://github.com/klette/constantstring</url>
@@ -84,13 +93,13 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>1.7.0</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -104,19 +113,13 @@
             </plugin>
         </plugins>
     </reporting>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <findbugs.version>3.0.0</findbugs.version>
-        <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
-    </properties>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
