@@ -69,6 +69,8 @@
         </plugins>
     </reporting>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <findbugs.version>3.0.0</findbugs.version>
         <jacoco-maven-plugin.version>0.7.2.201409121644</jacoco-maven-plugin.version>
     </properties>
