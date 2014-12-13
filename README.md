@@ -2,6 +2,7 @@ Constant String
 ===============
 
 [![Build Status](https://travis-ci.org/klette/constantstring.svg?branch=master)](https://travis-ci.org/klette/constantstring)
+[![Coverage Status](https://img.shields.io/coveralls/klette/constantstring.svg)](https://coveralls.io/r/klette/constantstring)
 
 Constant String is a library for doing constant time string manipulation in
 Java.
