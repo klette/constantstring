@@ -97,4 +97,17 @@ public interface CString {
                 new CStringSub(this, start+end)
         );
     }
+
+    /**
+     * Insert the given CString at the given index.
+     *
+     * @param other The CString to insert
+     * @param index The position where the string should be inserted
+     * @return The resulting CString representation
+     */
+    default CString insert(final CString other, final int index) {
+        return this.substring(0, index)
+                .concat(other)
+                .concat(this.substring(index));
+    }
 }

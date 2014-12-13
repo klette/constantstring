@@ -120,4 +120,14 @@ public final class OperationsTest {
         String s = foobar.toString();
         assertThat(s).isEqualTo("foobar".substring(3, 4));
     }
+
+    @Test
+    public void insert() throws Exception {
+        final CString foo = CStringInit.create("fooar");
+        final CString bar = CStringInit.create("b");
+        final CString foobar = foo.insert(bar, 3);
+
+        assertThat(foobar.toString()).isEqualTo("foobar");
+
+    }
 }
