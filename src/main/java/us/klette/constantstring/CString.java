@@ -31,6 +31,7 @@ package us.klette.constantstring;
 
 import us.klette.constantstring.internal.CStringConcat;
 import us.klette.constantstring.internal.CStringSub;
+import us.klette.constantstring.internal.CStringSubRange;
 
 /**
  * The CString interface defines the allowed operations
@@ -62,6 +63,17 @@ public interface CString {
     default CString substring(int index) {
         return new CStringSub(this, index);
     }
+    /**
+     * Applies a substring operations similar to
+     * {@link java.lang.String#substring(int, int)}.
+     *
+     * @param index The index of which to start the new string
+     * @param end The end index of the substring
+     * @return The CString representation after the applied substring operation
+     */
+    default CString substring(int index, int end) {
+        return new CStringSubRange(this, index, end);
+    }
 
     /**
      * Append another CString after the current instance.
@@ -71,5 +83,18 @@ public interface CString {
      */
     default CString concat(CString other) {
         return new CStringConcat(this, other);
+    }
+
+    /**
+     * Delete a subsection of the String.
+     *
+     * @param start The start index of the delete
+     * @param end The end index of the deleted part
+     */
+    default CString delete(int start, int end) {
+        return new CStringConcat(
+                new CStringSubRange(this, 0, start),
+                new CStringSub(this, start+end)
+        );
     }
 }

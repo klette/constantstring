@@ -31,6 +31,7 @@ package us.klette.constantstring;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import us.klette.constantstring.internal.CStringSubRange;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -105,5 +106,20 @@ public final class OperationsTest {
         final CString foobar = foo.concat(bar);
 
         assertThat(foobar.toString()).isEqualTo("foobar");
+    }
+
+    @Test
+    public void delete() throws Exception {
+        CString foobar = CStringInit.create("foobar");
+        CString bar = foobar.delete(0, 3);
+
+        assertThat(bar.toString()).isEqualTo("bar");
+    }
+
+    @Test
+    public void substring() throws Exception {
+        CString foobar = CStringInit.create("foobar").substring(3, 4);
+        String s = foobar.toString();
+        assertThat(s).isEqualTo("foobar".substring(3, 4));
     }
 }
