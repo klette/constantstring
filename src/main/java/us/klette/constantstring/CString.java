@@ -60,7 +60,7 @@ public interface CString {
      * @param index The index of which to start the new string
      * @return The CString representation after the applied substring operation
      */
-    default CString substring(int index) {
+    default CString substring(final int index) {
         return new CStringSub(this, index);
     }
     /**
@@ -71,7 +71,7 @@ public interface CString {
      * @param end The end index of the substring
      * @return The CString representation after the applied substring operation
      */
-    default CString substring(int index, int end) {
+    default CString substring(final int index, final int end) {
         return new CStringSubRange(this, index, end);
     }
 
@@ -81,7 +81,7 @@ public interface CString {
      * @param other The instance to be appended.
      * @return The CString representation of the two
      */
-    default CString concat(CString other) {
+    default CString concat(final CString other) {
         return new CStringConcat(this, other);
     }
 
@@ -91,7 +91,7 @@ public interface CString {
      * @param start The start index of the delete
      * @param end The end index of the deleted part
      */
-    default CString delete(int start, int end) {
+    default CString delete(final int start, final int end) {
         return new CStringConcat(
                 new CStringSubRange(this, 0, start),
                 new CStringSub(this, start+end)
