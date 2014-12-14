@@ -105,6 +105,13 @@ public final class OperationsTest {
 
         assertThat(foobar.toString()).isEqualTo("foobar");
     }
+    @Test
+    public void concatStringTest() throws Exception {
+        final CString foo = CStringInit.create("foo");
+        final CString foobar = foo.concat("bar");
+
+        assertThat(foobar.toString()).isEqualTo("foobar");
+    }
 
     @Test
     public void delete() throws Exception {
@@ -126,6 +133,15 @@ public final class OperationsTest {
         final CString foo = CStringInit.create("fooar");
         final CString bar = CStringInit.create("b");
         final CString foobar = foo.insert(bar, 3);
+
+        assertThat(foobar.toString()).isEqualTo("foobar");
+
+    }
+
+    @Test
+    public void insertString() throws Exception {
+        final CString foo = CStringInit.create("fooar");
+        final CString foobar = foo.insert("b", 3);
 
         assertThat(foobar.toString()).isEqualTo("foobar");
 

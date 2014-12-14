@@ -30,6 +30,7 @@
 package us.klette.constantstring;
 
 import us.klette.constantstring.internal.CStringConcat;
+import us.klette.constantstring.internal.CStringLeaf;
 import us.klette.constantstring.internal.CStringSub;
 import us.klette.constantstring.internal.CStringSubRange;
 
@@ -84,6 +85,15 @@ public interface CString {
     default CString concat(final CString other) {
         return new CStringConcat(this, other);
     }
+    /**
+     * Append another CString after the current instance.
+     *
+     * @param other The instance to be appended.
+     * @return The CString representation of the two
+     */
+    default CString concat(final String other) {
+        return new CStringConcat(this, new CStringLeaf(other));
+    }
 
     /**
      * Delete a subsection of the String.
@@ -108,6 +118,19 @@ public interface CString {
     default CString insert(final CString other, final int index) {
         return this.substring(0, index)
                 .concat(other)
+                .concat(this.substring(index));
+    }
+
+    /**
+     * Insert the given CString at the given index.
+     *
+     * @param other The CString to insert
+     * @param index The position where the string should be inserted
+     * @return The resulting CString representation
+     */
+    default CString insert(final String other, final int index) {
+        return this.substring(0, index)
+                .concat(new CStringLeaf(other))
                 .concat(this.substring(index));
     }
 }
