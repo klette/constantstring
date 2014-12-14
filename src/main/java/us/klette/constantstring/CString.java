@@ -86,13 +86,13 @@ public interface CString {
         return new CStringConcat(this, other);
     }
     /**
-     * Append another CString after the current instance.
+     * Append another String after the current instance.
      *
      * @param other The instance to be appended.
      * @return The CString representation of the two
      */
     default CString concat(final String other) {
-        return new CStringConcat(this, new CStringLeaf(other));
+        return this.concat(new CStringLeaf(other));
     }
 
     /**
@@ -100,6 +100,7 @@ public interface CString {
      *
      * @param start The start index of the delete
      * @param end The end index of the deleted part
+     * @return The CString representation with the delete applied.
      */
     default CString delete(final int start, final int end) {
         return new CStringConcat(
@@ -122,15 +123,13 @@ public interface CString {
     }
 
     /**
-     * Insert the given CString at the given index.
+     * Insert the given String at the given index.
      *
-     * @param other The CString to insert
+     * @param other The String to insert
      * @param index The position where the string should be inserted
      * @return The resulting CString representation
      */
     default CString insert(final String other, final int index) {
-        return this.substring(0, index)
-                .concat(new CStringLeaf(other))
-                .concat(this.substring(index));
+        return this.insert(new CStringLeaf(other), index);
     }
 }
