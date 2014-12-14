@@ -8,15 +8,15 @@ Constant String is a library for doing constant time string manipulation in
 Java.
 
 ```java
-
 CString cs = CStringInit
     .create("foo")
-    .append("bar")
+    .concat(CStringInit.create("bar"))
     .substring(3)
-    .add("bara");
+    .concat(CStringInit.create("bara"))
+    .delete(3,7)
+    .insert(0, CStringInit.create("foo"));
 
-cs.toString(); // barbara
-
+cs.toString(); // foobar
 ```
 
 Perhaps not the most useful thing in everyday programming, but still a fun
