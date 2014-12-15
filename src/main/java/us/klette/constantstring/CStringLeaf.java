@@ -27,54 +27,36 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-package us.klette.constantstring.internal;
-
-import us.klette.constantstring.CString;
+package us.klette.constantstring;
 
 import javax.annotation.Nonnull;
 
 /**
- * Representation of a substring operation.
+ * Represents a value node of a CString operation tree.
  *
  * @author Kristian Klette (klette@klette.us)
  */
-public class CStringSubRange implements CString {
-    /**
-     * The child node which the substring operation is
-     * performed upon.
-     */
-    private final transient CString value;
+final class CStringLeaf implements CString {
 
     /**
-     * The index from which the text is kept.
+     * The value this leaf nodes carries.
      */
-    private final transient int idx;
+    private final transient String value;
 
     /**
-     * The number of chars after {@link #idx} to include.
-     */
-    private final int end;
-
-    /**
-     * Creates a new substring operation on the given value.
+     * Constructs a new lead node with the given value.
      *
-     * @param val   The value used as the child node for the operation.
-     * @param index The index from which the text is kept.
-     * @param end The end index of the substring
+     * @param val The value the leaf should carry.
      */
-    public CStringSubRange(@Nonnull final CString val, final int index, final int end) {
+    public CStringLeaf(@Nonnull final String val) {
+        if (null == val) {
+            throw new NullPointerException("CString leaf node value cannot be null");
+        }
         this.value = val;
-        this.idx = index;
-        this.end = end;
     }
 
     @Override
-    public final String toString() {
-        final String childEval = this.value.toString();
-        final int length = childEval.length();
-        return this.idx > length - 1
-               ? ""
-               : childEval.substring(this.idx, Math.min(end, length));
+    public String toString() {
+        return this.value;
     }
 }

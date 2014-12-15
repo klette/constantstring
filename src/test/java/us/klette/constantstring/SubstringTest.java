@@ -97,7 +97,7 @@ public class SubstringTest {
      */
     @Test
     public final void substringTest() throws Exception {
-        final String result = CStringInit.create(this.value)
+        final String result = CString.create(this.value)
                 .substring(this.index)
                 .toString();
         Assertions.assertThat(result).isEqualTo(this.expected);

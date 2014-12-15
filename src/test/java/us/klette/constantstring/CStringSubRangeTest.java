@@ -27,46 +27,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package us.klette.constantstring.internal;
 
-import us.klette.constantstring.CString;
+package us.klette.constantstring;
 
-import javax.annotation.Nonnull;
+import org.junit.Test;
 
-/**
- * Representation of a substring operation.
- *
- * @author Kristian Klette (klette@klette.us)
- */
-public class CStringSub implements CString {
-    /**
-     * The child node which the substring operation is
-     * performed upon.
-     */
-    private final transient CString value;
+import static org.assertj.core.api.Assertions.assertThat;
 
-    /**
-     * The index from which the text is kept.
-     */
-    private final transient int idx;
+public class CStringSubRangeTest {
 
-    /**
-     * Creates a new substring operation on the given value.
-     *
-     * @param val   The value used as the child node for the operation.
-     * @param index The index from which the text is kept.
-     */
-    public CStringSub(@Nonnull final CString val, final int index) {
-        this.value = val;
-        this.idx = index;
+    @Test
+    public void testToString() throws Exception {
+        CStringSubRange foobar = new CStringSubRange(CString.create("foobar"), 3, 4);
+        String s = foobar.toString();
+        assertThat(s).isEqualTo("foobar".substring(3, 4));
     }
 
-    @Override
-    public final String toString() {
-        final String childEval = this.value.toString();
-        final int length = childEval.length();
-        return this.idx > length - 1
-               ? ""
-               : childEval.substring(this.idx);
+    @Test
+    public void overflow() throws Exception {
+        CStringSubRange foobar = new CStringSubRange(CString.create("foobar"), 10, 12);
+        String s = foobar.toString();
+        assertThat(s).isEqualTo("");
+    }
+
+    @Test
+    public void partialOverflow() throws Exception {
+        CStringSubRange foobar = new CStringSubRange(CString.create("foobar"), 3, 12);
+        String s = foobar.toString();
+        assertThat(s).isEqualTo("bar");
     }
 }

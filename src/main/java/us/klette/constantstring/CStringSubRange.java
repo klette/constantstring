@@ -27,33 +27,52 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package us.klette.constantstring;
 
-import us.klette.constantstring.internal.CStringLeaf;
+package us.klette.constantstring;
 
 import javax.annotation.Nonnull;
 
 /**
- * Factory for creating CString instances from native Strings.
+ * Representation of a substring operation.
  *
  * @author Kristian Klette (klette@klette.us)
  */
-public final class CStringInit {
+class CStringSubRange implements CString {
+    /**
+     * The child node which the substring operation is
+     * performed upon.
+     */
+    private final transient CString value;
 
     /**
-     * Private.
+     * The index from which the text is kept.
      */
-    private CStringInit() {
-        // No construction is necessary
+    private final transient int idx;
+
+    /**
+     * The number of chars after {@link #idx} to include.
+     */
+    private final int end;
+
+    /**
+     * Creates a new substring operation on the given value.
+     *
+     * @param val   The value used as the child node for the operation.
+     * @param index The index from which the text is kept.
+     * @param end The end index of the substring
+     */
+    public CStringSubRange(@Nonnull final CString val, final int index, final int end) {
+        this.value = val;
+        this.idx = index;
+        this.end = end;
     }
 
-    /**
-     * Creates a new CString instance from the given string.
-     *
-     * @param val The value to use as a base
-     * @return The CString representation.
-     */
-    public static CString create(@Nonnull final String val) {
-        return new CStringLeaf(val);
+    @Override
+    public final String toString() {
+        final String childEval = this.value.toString();
+        final int length = childEval.length();
+        return this.idx > length - 1
+               ? ""
+               : childEval.substring(this.idx, Math.min(end, length));
     }
 }

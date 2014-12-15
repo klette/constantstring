@@ -27,38 +27,14 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package us.klette.constantstring.internal;
 
-import us.klette.constantstring.CString;
+package us.klette.constantstring;
 
-import javax.annotation.Nonnull;
+import org.junit.Test;
 
-/**
- * Represents a value node of a CString operation tree.
- *
- * @author Kristian Klette (klette@klette.us)
- */
-public final class CStringLeaf implements CString {
-
-    /**
-     * The value this leaf nodes carries.
-     */
-    private final transient String value;
-
-    /**
-     * Constructs a new lead node with the given value.
-     *
-     * @param val The value the leaf should carry.
-     */
-    public CStringLeaf(@Nonnull final String val) {
-        if (null == val) {
-            throw new NullPointerException("CString leaf node value cannot be null");
-        }
-        this.value = val;
-    }
-
-    @Override
-    public String toString() {
-        return this.value;
+public class CStringLeafTest {
+    @Test(expected = NullPointerException.class)
+    public void shouldThrowNPEIfConstructedWithNull() throws Exception {
+        new CStringLeaf(null);
     }
 }

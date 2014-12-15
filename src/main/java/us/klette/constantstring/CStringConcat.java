@@ -27,34 +27,32 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package us.klette.constantstring;
 
-package us.klette.constantstring.internal;
+import javax.annotation.Nonnull;
 
-import org.junit.Test;
-import us.klette.constantstring.CStringInit;
+/**
+ * Representation of two concatenated CString instances.
+ *
+ * @author Kristian Klette (klette@klette.us)
+ */
+class CStringConcat implements CString {
+    private final CString first;
+    private final CString second;
 
-import static org.assertj.core.api.Assertions.*;
-
-public class CStringSubRangeTest {
-
-    @Test
-    public void testToString() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 3, 4);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("foobar".substring(3, 4));
+    /**
+     * Creates a new concatenation in the order of the parameters.
+     *
+     * @param first The CString that should be concated on to
+     * @param second The CString that should be appended to the other
+     */
+    public CStringConcat(@Nonnull final CString first, @Nonnull final CString second) {
+        this.first = first;
+        this.second = second;
     }
 
-    @Test
-    public void overflow() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 10, 12);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("");
-    }
-
-    @Test
-    public void partialOverflow() throws Exception {
-        CStringSubRange foobar = new CStringSubRange(CStringInit.create("foobar"), 3, 12);
-        String s = foobar.toString();
-        assertThat(s).isEqualTo("bar");
+    @Override
+    public String toString() {
+        return first.toString() + second.toString();
     }
 }

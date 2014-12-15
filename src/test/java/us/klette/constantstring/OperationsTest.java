@@ -40,6 +40,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public final class OperationsTest {
 
+    @Test
+    public void create() throws Exception {
+        CString foobar = CString.create("foobar");
+
+        assertThat(foobar.toString()).isEqualTo("foobar");
+    }
+
     /**
      * Verify that CString can store and evaluate basic strings.
      *
@@ -48,7 +55,7 @@ public final class OperationsTest {
     @Test
     public void evalShouldReturnBasicValue() throws Exception {
         final String string = "basic";
-        final CString cString = CStringInit.create(string);
+        final CString cString = CString.create(string);
         final String eval = cString.toString();
         assertThat(eval).isEqualTo(string);
     }
@@ -62,7 +69,7 @@ public final class OperationsTest {
     public void shouldBeAbleToSubstring() throws Exception {
         final String string = "substr";
         final int index = 3;
-        final CString initial = CStringInit.create(string);
+        final CString initial = CString.create(string);
         final CString substring = initial.substring(index);
         final String evaluated = substring.toString();
         assertThat(evaluated).isEqualTo(string.substring(index));
@@ -76,7 +83,7 @@ public final class OperationsTest {
     @Test
     public void substringWithIndexOutsideBoundsShouldBeEmptyString() {
         final String foobar = "foobar";
-        final String substr = CStringInit
+        final String substr = CString
                 .create(foobar)
                 .substring(foobar.length())
                 .toString();
@@ -90,7 +97,7 @@ public final class OperationsTest {
      */
     @Test
     public void substringOfSubstring() throws Exception {
-        final CString initial = CStringInit.create("abc");
+        final CString initial = CString.create("abc");
         final CString first = initial.substring(1);
         final CString second = first.substring(1);
         final String evaluated = second.toString();
@@ -99,15 +106,15 @@ public final class OperationsTest {
 
     @Test
     public void concatTest() throws Exception {
-        final CString foo = CStringInit.create("foo");
-        final CString bar = CStringInit.create("bar");
+        final CString foo = CString.create("foo");
+        final CString bar = CString.create("bar");
         final CString foobar = foo.concat(bar);
 
         assertThat(foobar.toString()).isEqualTo("foobar");
     }
     @Test
     public void concatStringTest() throws Exception {
-        final CString foo = CStringInit.create("foo");
+        final CString foo = CString.create("foo");
         final CString foobar = foo.concat("bar");
 
         assertThat(foobar.toString()).isEqualTo("foobar");
@@ -115,7 +122,7 @@ public final class OperationsTest {
 
     @Test
     public void delete() throws Exception {
-        CString foobar = CStringInit.create("foobar");
+        CString foobar = CString.create("foobar");
         CString bar = foobar.delete(0, 3);
 
         assertThat(bar.toString()).isEqualTo("bar");
@@ -123,15 +130,15 @@ public final class OperationsTest {
 
     @Test
     public void substring() throws Exception {
-        CString foobar = CStringInit.create("foobar").substring(3, 4);
+        CString foobar = CString.create("foobar").substring(3, 4);
         String s = foobar.toString();
         assertThat(s).isEqualTo("foobar".substring(3, 4));
     }
 
     @Test
     public void insert() throws Exception {
-        final CString foo = CStringInit.create("fooar");
-        final CString bar = CStringInit.create("b");
+        final CString foo = CString.create("fooar");
+        final CString bar = CString.create("b");
         final CString foobar = foo.insert(bar, 3);
 
         assertThat(foobar.toString()).isEqualTo("foobar");
@@ -140,7 +147,7 @@ public final class OperationsTest {
 
     @Test
     public void insertString() throws Exception {
-        final CString foo = CStringInit.create("fooar");
+        final CString foo = CString.create("fooar");
         final CString foobar = foo.insert("b", 3);
 
         assertThat(foobar.toString()).isEqualTo("foobar");

@@ -29,11 +29,6 @@
  */
 package us.klette.constantstring;
 
-import us.klette.constantstring.internal.CStringConcat;
-import us.klette.constantstring.internal.CStringLeaf;
-import us.klette.constantstring.internal.CStringSub;
-import us.klette.constantstring.internal.CStringSubRange;
-
 import javax.annotation.Nonnull;
 
 /**
@@ -48,6 +43,17 @@ import javax.annotation.Nonnull;
  * @author Kristian Klette (klette@klette.us)
  */
 public interface CString {
+
+    /**
+     * Creates a new CString instance from a String.
+     *
+     * @param value The String to use as a base value
+     * @return The CString instance from the string
+     */
+    static CString create(final String value) {
+        return new CStringLeaf(value);
+    }
+
     /**
      * Evaluates the CString into a String.
      *

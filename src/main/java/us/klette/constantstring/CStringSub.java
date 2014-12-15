@@ -27,14 +27,44 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package us.klette.constantstring;
 
-package us.klette.constantstring.internal;
+import javax.annotation.Nonnull;
 
-import org.junit.Test;
+/**
+ * Representation of a substring operation.
+ *
+ * @author Kristian Klette (klette@klette.us)
+ */
+class CStringSub implements CString {
+    /**
+     * The child node which the substring operation is
+     * performed upon.
+     */
+    private final transient CString value;
 
-public class CStringLeafTest {
-    @Test(expected = NullPointerException.class)
-    public void shouldThrowNPEIfConstructedWithNull() throws Exception {
-        new CStringLeaf(null);
+    /**
+     * The index from which the text is kept.
+     */
+    private final transient int idx;
+
+    /**
+     * Creates a new substring operation on the given value.
+     *
+     * @param val   The value used as the child node for the operation.
+     * @param index The index from which the text is kept.
+     */
+    public CStringSub(@Nonnull final CString val, final int index) {
+        this.value = val;
+        this.idx = index;
+    }
+
+    @Override
+    public final String toString() {
+        final String childEval = this.value.toString();
+        final int length = childEval.length();
+        return this.idx > length - 1
+               ? ""
+               : childEval.substring(this.idx);
     }
 }
