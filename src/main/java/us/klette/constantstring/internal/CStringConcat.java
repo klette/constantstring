@@ -31,6 +31,8 @@ package us.klette.constantstring.internal;
 
 import us.klette.constantstring.CString;
 
+import javax.annotation.Nonnull;
+
 /**
  * Representation of two concatenated CString instances.
  *
@@ -46,7 +48,7 @@ public class CStringConcat implements CString {
      * @param first The CString that should be concated on to
      * @param second The CString that should be appended to the other
      */
-    public CStringConcat(final CString first, final CString second) {
+    public CStringConcat(@Nonnull final CString first, @Nonnull final CString second) {
         this.first = first;
         this.second = second;
     }

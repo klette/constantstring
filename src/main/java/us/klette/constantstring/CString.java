@@ -34,6 +34,8 @@ import us.klette.constantstring.internal.CStringLeaf;
 import us.klette.constantstring.internal.CStringSub;
 import us.klette.constantstring.internal.CStringSubRange;
 
+import javax.annotation.Nonnull;
+
 /**
  * The CString interface defines the allowed operations
  * within ConstantString.
@@ -82,7 +84,7 @@ public interface CString {
      * @param other The instance to be appended.
      * @return The CString representation of the two
      */
-    default CString concat(final CString other) {
+    default CString concat(@Nonnull final CString other) {
         return new CStringConcat(this, other);
     }
     /**
@@ -91,7 +93,7 @@ public interface CString {
      * @param other The instance to be appended.
      * @return The CString representation of the two
      */
-    default CString concat(final String other) {
+    default CString concat(@Nonnull final String other) {
         return this.concat(new CStringLeaf(other));
     }
 
@@ -116,7 +118,7 @@ public interface CString {
      * @param index The position where the string should be inserted
      * @return The resulting CString representation
      */
-    default CString insert(final CString other, final int index) {
+    default CString insert(@Nonnull final CString other, final int index) {
         return this.substring(0, index)
                 .concat(other)
                 .concat(this.substring(index));
@@ -129,7 +131,7 @@ public interface CString {
      * @param index The position where the string should be inserted
      * @return The resulting CString representation
      */
-    default CString insert(final String other, final int index) {
+    default CString insert(@Nonnull final String other, final int index) {
         return this.insert(new CStringLeaf(other), index);
     }
 }

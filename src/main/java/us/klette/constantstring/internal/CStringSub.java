@@ -31,6 +31,8 @@ package us.klette.constantstring.internal;
 
 import us.klette.constantstring.CString;
 
+import javax.annotation.Nonnull;
+
 /**
  * Representation of a substring operation.
  *
@@ -54,7 +56,7 @@ public class CStringSub implements CString {
      * @param val   The value used as the child node for the operation.
      * @param index The index from which the text is kept.
      */
-    public CStringSub(final CString val, final int index) {
+    public CStringSub(@Nonnull final CString val, final int index) {
         this.value = val;
         this.idx = index;
     }
