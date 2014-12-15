@@ -33,7 +33,7 @@
 
     <groupId>us.klette</groupId>
     <artifactId>constantstring</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -72,7 +72,7 @@
         <url>https://github.com/klette/constantstring</url>
         <connection>scm:git:git://github.com/klette/constantstring.git</connection>
         <developerConnection>scm:git:git@github.com:klette/constantstring.git</developerConnection>
-      <tag>constantstring-1.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <issueManagement>
