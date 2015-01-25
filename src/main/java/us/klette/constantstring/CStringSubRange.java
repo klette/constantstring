@@ -33,7 +33,7 @@ package us.klette.constantstring;
 import javax.annotation.Nonnull;
 
 /**
- * Representation of a substring operation.
+ * Representation of a bounded substring operation.
  *
  * @author Kristian Klette (klette@klette.us)
  */
@@ -47,32 +47,32 @@ class CStringSubRange implements CString {
     /**
      * The index from which the text is kept.
      */
-    private final int idx;
+    private final int beginIndex;
 
     /**
-     * The number of chars after {@link #idx} to include.
+     * The number of chars after {@link #beginIndex} to include.
      */
-    private final int end;
+    private final int length;
 
     /**
      * Creates a new substring operation on the given value.
      *
      * @param val   The value used as the child node for the operation.
-     * @param index The index from which the text is kept.
-     * @param end The end index of the substring
+     * @param beginIndex The index from which the text is kept.
+     * @param length The length index of the substring
      */
-    public CStringSubRange(@Nonnull final CString val, final int index, final int end) {
+    public CStringSubRange(@Nonnull final CString val, final int beginIndex, final int length) {
         this.value = val;
-        this.idx = index;
-        this.end = end;
+        this.beginIndex = beginIndex;
+        this.length = length;
     }
 
     @Override
     public final String toString() {
         final String childEval = this.value.toString();
         final int length = childEval.length();
-        return this.idx > length - 1
+        return this.beginIndex > length - 1
                ? ""
-               : childEval.substring(this.idx, Math.min(end, length));
+               : childEval.substring(this.beginIndex, Math.min(this.length, length));
     }
 }

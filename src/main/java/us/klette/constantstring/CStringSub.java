@@ -32,7 +32,14 @@ package us.klette.constantstring;
 import javax.annotation.Nonnull;
 
 /**
- * Representation of a substring operation.
+ * Representation of a substring operation that is unbounded in length.
+ *
+ * This is a separate form of {@link us.klette.constantstring.CStringSubRange}
+ * since we don't know the length of the computed value in the child graph.
+ *
+ * Encoding this operation as a separate node type simplifies the implementation,
+ * by not having to encode the size as unknown (using 0,-1, null or similar) as
+ * the "length", and dealing with that in in the toString()-method.
  *
  * @author Kristian Klette (klette@klette.us)
  */
@@ -46,25 +53,25 @@ class CStringSub implements CString {
     /**
      * The index from which the text is kept.
      */
-    private final int idx;
+    private final int beginIndex;
 
     /**
      * Creates a new substring operation on the given value.
      *
-     * @param val   The value used as the child node for the operation.
-     * @param index The index from which the text is kept.
+     * @param value   The value used as the child node for the operation.
+     * @param beginIndex The index from which the text is kept.
      */
-    public CStringSub(@Nonnull final CString val, final int index) {
-        this.value = val;
-        this.idx = index;
+    public CStringSub(@Nonnull final CString value, final int beginIndex) {
+        this.value = value;
+        this.beginIndex = beginIndex;
     }
 
     @Override
     public final String toString() {
-        final String childEval = this.value.toString();
-        final int length = childEval.length();
-        return this.idx > length - 1
+        final String valueAsString = this.value.toString();
+        final int length = valueAsString.length();
+        return this.beginIndex > length - 1
                ? ""
-               : childEval.substring(this.idx);
+               : valueAsString.substring(this.beginIndex);
     }
 }
