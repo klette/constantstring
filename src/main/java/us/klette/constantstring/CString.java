@@ -111,10 +111,7 @@ public interface CString {
      * @return The CString representation with the delete applied.
      */
     default CString delete(final int start, final int end) {
-        return new CStringConcat(
-                new CStringSubRange(this, 0, start),
-                new CStringSub(this, start+end)
-        );
+        return this.substring(0, start).concat(this.substring(end));
     }
 
     /**
