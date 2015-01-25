@@ -41,7 +41,7 @@ final class CStringLeaf implements CString {
     /**
      * The value this leaf nodes carries.
      */
-    private final transient String value;
+    private final String value;
 
     /**
      * Constructs a new lead node with the given value.

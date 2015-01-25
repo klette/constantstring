@@ -41,12 +41,12 @@ class CStringSub implements CString {
      * The child node which the substring operation is
      * performed upon.
      */
-    private final transient CString value;
+    private final CString value;
 
     /**
      * The index from which the text is kept.
      */
-    private final transient int idx;
+    private final int idx;
 
     /**
      * Creates a new substring operation on the given value.

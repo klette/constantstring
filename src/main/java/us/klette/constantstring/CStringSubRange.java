@@ -42,12 +42,12 @@ class CStringSubRange implements CString {
      * The child node which the substring operation is
      * performed upon.
      */
-    private final transient CString value;
+    private final CString value;
 
     /**
      * The index from which the text is kept.
      */
-    private final transient int idx;
+    private final int idx;
 
     /**
      * The number of chars after {@link #idx} to include.
